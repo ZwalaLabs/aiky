@@ -1,28 +1,32 @@
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
+import { Button } from "@/components/ui/button";
 import {
   DropdownMenu,
   DropdownMenuContent,
   DropdownMenuItem,
-  DropdownMenuLabel,
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
-import { LogOut } from "lucide-react";
+import { BadgePlus, LogOut } from "lucide-react";
 import Link from "next/link";
 
 function Header() {
   return (
-    <header className="flex items-center justify-between px-10">
+    <header className="flex min-h-[3.5rem] items-center justify-between px-10">
       <DropdownMenu>
-        <DropdownMenuTrigger className="min-h-[3.5rem]">
-          Community Name
-        </DropdownMenuTrigger>
+        <DropdownMenuTrigger>Community Name</DropdownMenuTrigger>
         <DropdownMenuContent>
-          <DropdownMenuLabel>Others</DropdownMenuLabel>
+          <DropdownMenuItem>Others</DropdownMenuItem>
+          <DropdownMenuItem>
+            <Button className="flex items-center gap-2">
+              <BadgePlus />
+              Create Community
+            </Button>
+          </DropdownMenuItem>
         </DropdownMenuContent>
       </DropdownMenu>
 
       <DropdownMenu>
-        <DropdownMenuTrigger className="min-h-[3.5rem]">
+        <DropdownMenuTrigger>
           <Avatar>
             <AvatarImage src="https://github.com/shadcn.png" />
             <AvatarFallback>CN</AvatarFallback>
