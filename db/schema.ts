@@ -62,3 +62,23 @@ export const verificationTokens = pgTable(
     compoundKey: primaryKey({ columns: [vt.identifier, vt.token] }),
   }),
 );
+
+export const communities = pgTable("community", {
+  id: text("id")
+    .$defaultFn(() => createId())
+    .primaryKey()
+    .notNull(),
+  userId: text("userId")
+    .notNull()
+    .references(() => users.id, { onDelete: "cascade" }),
+  name: text("name").notNull().unique(),
+  timestamp: timestamp("timestamp", { mode: "string" })
+    .$defaultFn(() => new Date().toISOString())
+    .notNull(),
+  description: text("description").notNull(),
+  publicURL: text("publicURL").notNull().unique(),
+  logo: text("logo"),
+  coverPhoto: text("coverPhoto"),
+});
+export type SelectCommunity = typeof communities.$inferSelect;
+export type InsertCommunity = typeof communities.$inferInsert;
