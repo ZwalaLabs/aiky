@@ -1,5 +1,13 @@
 import { z } from "zod";
 
+export const communityTypeValues = [
+  "Personal Development",
+  "Finance",
+  "Fitness",
+  "Career",
+] as const;
+const communityType = z.enum(communityTypeValues);
+
 export const createCommunityInput = z.object({
   name: z
     .string()
@@ -17,4 +25,5 @@ export const createCommunityInput = z.object({
     .max(100, {
       message: "Form description can be at most 100 characters.",
     }),
+  type: communityType,
 });
