@@ -6,18 +6,28 @@
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "lint": "next lint"
+    "lint": "next lint",
+    "generate:pg": "pnpm drizzle-kit generate:pg",
+    "push:pg": "pnpm drizzle-kit push:pg",
+    "studio": "pnpm generate:pg && pnpm push:pg && pnpm drizzle-kit studio --verbose"
   },
   "dependencies": {
+    "@auth/core": "^0.28.1",
+    "@paralleldrive/cuid2": "^2.2.2",
+    "drizzle-orm": "^0.30.5",
     "next": "14.1.4",
+    "next-auth": "^4.24.7",
+    "pg": "^8.11.3",
     "react": "^18",
     "react-dom": "^18"
   },
   "devDependencies": {
     "@types/node": "^20",
+    "@types/pg": "^8.11.4",
     "@types/react": "^18",
     "@types/react-dom": "^18",
     "autoprefixer": "^10.0.1",
+    "drizzle-kit": "^0.20.14",
     "eslint": "^8",
     "eslint-config-next": "14.1.4",
     "eslint-config-prettier": "^9.1.0",
