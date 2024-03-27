@@ -2,7 +2,7 @@
 
 import { useForm } from "react-hook-form";
 import { z } from "zod";
-import { communityTypeValues, createCommunityInput } from "@/lib/zodSchemas";
+import { createCommunityInput } from "@/lib/zodSchemas";
 import { zodResolver } from "@hookform/resolvers/zod";
 import {
   Form,
@@ -15,8 +15,26 @@ import {
 import { Input } from "@/components/ui/input";
 import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group";
 import { Button } from "@/components/ui/button";
+import { trpc } from "@/app/(app)/_trpc/client";
+import toast from "react-hot-toast";
+import { communityTypeValues } from "@/lib/constants";
 
 export default function CreateForm() {
+  const trpcUtils = trpc.useUtils();
+
+  const addCommunityMutation = trpc.community.add.useMutation({
+    trpc: { abortOnUnmount: false },
+    onSuccess: ({ message }) => {
+      toast.success(message);
+    },
+    onError: ({ message }) => {
+      if (message.includes("duplicate"))
+        toast.error("A community with this name already exists");
+      else toast.error("Something went wrong");
+    },
+    onSettled: () => trpcUtils.community.getAll.invalidate(),
+  });
+
   const form = useForm<z.infer<typeof createCommunityInput>>({
     resolver: zodResolver(createCommunityInput),
     defaultValues: {
@@ -27,14 +45,14 @@ export default function CreateForm() {
   });
 
   function onSubmit(values: z.infer<typeof createCommunityInput>) {
-    console.log(values);
+    addCommunityMutation.mutate(values);
   }
 
   return (
     <Form {...form}>
       <form
         onSubmit={form.handleSubmit(onSubmit)}
-        className="flex h-screen flex-[100%] flex-col justify-center gap-12 p-12"
+        className="from-primary/35 flex h-screen flex-[100%] flex-col justify-center gap-12 bg-gradient-to-bl via-white to-white p-12"
       >
         <FormField
           control={form.control}
@@ -97,7 +115,11 @@ export default function CreateForm() {
             </FormItem>
           )}
         />
-        <Button type="submit" className="w-full text-xl font-bold">
+        <Button
+          type="submit"
+          className="mx-auto p-6 text-2xl font-bold"
+          disabled={addCommunityMutation.isLoading}
+        >
           Get Started
         </Button>
       </form>

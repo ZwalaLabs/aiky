@@ -1,11 +1,6 @@
 import { z } from "zod";
+import { communityTypeValues } from "@/lib/constants";
 
-export const communityTypeValues = [
-  "Personal Development",
-  "Finance",
-  "Fitness",
-  "Career",
-] as const;
 const communityType = z.enum(communityTypeValues);
 
 export const createCommunityInput = z.object({

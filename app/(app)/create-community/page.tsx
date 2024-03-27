@@ -12,6 +12,7 @@ export default function Home() {
           width="1000"
           height="1000"
           className="flex-[100%] object-cover"
+          priority
         />
         <CreateForm />
       </div>
