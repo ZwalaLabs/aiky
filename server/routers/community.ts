@@ -3,7 +3,7 @@ import { createCommunityInput } from "@/lib/zodSchemas";
 import db from "@/db";
 import { communities, InsertCommunity } from "@/db/schema";
 
-const formRouter = router({
+const communityRouter = router({
   getAll: authedProcedure.query(async () => "true"),
   add: authedProcedure
     .input(createCommunityInput)
@@ -28,4 +28,4 @@ const formRouter = router({
     }),
 });
 
-export default formRouter;
+export default communityRouter;
