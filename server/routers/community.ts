@@ -12,6 +12,7 @@ const formRouter = router({
         name: input.name,
         publicURL: input.name,
         description: input.description,
+        type: input.type,
         userId: ctx.user.id,
       };
 

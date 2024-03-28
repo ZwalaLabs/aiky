@@ -8,6 +8,8 @@ import {
   timestamp,
 } from "drizzle-orm/pg-core";
 
+import { communityTypeValues } from "@/lib/constants";
+
 export const users = pgTable("user", {
   id: text("id")
     .$defaultFn(() => createId())
@@ -76,6 +78,9 @@ export const communities = pgTable("community", {
     .$defaultFn(() => new Date().toISOString())
     .notNull(),
   description: text("description").notNull(),
+  type: text("inputType", {
+    enum: communityTypeValues,
+  }).notNull(),
   publicURL: text("publicURL").notNull().unique(),
   logo: text("logo"),
   coverPhoto: text("coverPhoto"),
