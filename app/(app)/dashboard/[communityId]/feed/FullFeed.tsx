@@ -3,6 +3,7 @@
 import { RouterOutputs } from "@/server";
 import { trpc } from "@/app/(app)/_trpc/client";
 import { useParams } from "next/navigation";
+import Feed from "./Feed";
 
 function FullFeed({
   initialPosts,
@@ -23,12 +24,17 @@ function FullFeed({
   );
 
   return (
-    <section>
+    <section className='mx-auto flex max-w-screen-lg flex-col gap-4 border-b border-b-gray-300 p-8'>
       {getAllForms.data?.map((post) => (
-        <article key={post.id}>
-          <h2>{post.title}</h2>
-          <p>{post.content}</p>
-        </article>
+        <Feed
+          key={post.id}
+          title={post.title}
+          content={post.content}
+          likes={post.likes}
+          time={post.timestamp}
+          name={post.userId.name}
+          image={post.userId.image}
+        />
       ))}
     </section>
   );
