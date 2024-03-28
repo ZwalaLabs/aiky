@@ -19,6 +19,7 @@ import { trpc } from "@/app/(app)/_trpc/client";
 import toast from "react-hot-toast";
 import { communityTypeValues } from "@/lib/constants";
 import { useRouter } from "next/navigation";
+import { Textarea } from "@/components/ui/textarea";
 
 export default function CreateForm() {
   const router = useRouter();
@@ -81,7 +82,7 @@ export default function CreateForm() {
                 Describe your community
               </FormLabel>
               <FormControl>
-                <Input placeholder="Community Description" {...field} />
+                <Textarea placeholder="Community Description" {...field} />
               </FormControl>
               <FormMessage />
             </FormItem>
