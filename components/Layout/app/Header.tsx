@@ -24,7 +24,7 @@ function Header() {
   const session = useSession();
 
   return (
-    <header className="flex min-h-[3.5rem] items-center justify-between px-10">
+    <header className="flex h-[3.5rem] w-full items-center justify-between px-10">
       <NavigationMenu className="z-50">
         <NavigationMenuList>
           <NavigationMenuItem>
