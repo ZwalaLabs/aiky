@@ -4,7 +4,7 @@ import db from "@/db";
 import { communities, InsertCommunity } from "@/db/schema";
 
 const formRouter = router({
-  getAll: authedProcedure.query(async () => true),
+  getAll: authedProcedure.query(async () => "true"),
   add: authedProcedure
     .input(createCommunityInput)
     .mutation(async ({ ctx, input }) => {
