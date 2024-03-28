@@ -14,14 +14,14 @@ async function Community({
 }) {
   return (
     <>
-      <CardHeader>
+      <CardHeader className="text-center">
         <CardTitle>Customize your community page</CardTitle>
         <CardDescription>
           This page shows non-members basic information about your community
         </CardDescription>
       </CardHeader>
 
-      <CardContent className="space-y-2">
+      <CardContent className="mx-auto max-w-3xl space-y-2">
         <CommunityForm initCommunity={initCommunity} />
       </CardContent>
     </>
