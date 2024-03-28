@@ -15,18 +15,39 @@ import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 import { Textarea } from "@/components/ui/textarea";
 import { createPostSchema } from "@/lib/zodSchemas";
+import { trpc } from "@/app/(app)/_trpc/client";
+import toast from "react-hot-toast";
+import { useParams } from "next/navigation";
 
 export function CreatePostForm() {
+  const params = useParams<{ communityId: string }>();
+
+  const trpcUtils = trpc.useUtils();
+
+  const addPost = trpc.post.add.useMutation({
+    trpc: { abortOnUnmount: false },
+    onSuccess: ({ message }) => {
+      toast.success(message);
+
+      form.reset();
+    },
+    onError: ({ message }) => {
+      toast.error("Something went wrong");
+    },
+    onSettled: () => trpcUtils.post.getAll.invalidate(),
+  });
+
   const form = useForm<z.infer<typeof createPostSchema>>({
     resolver: zodResolver(createPostSchema),
     defaultValues: {
       title: "",
       content: "",
+      communityId: params.communityId,
     },
   });
 
   function onSubmit(values: z.infer<typeof createPostSchema>) {
-    console.log(values);
+    addPost.mutate(values);
   }
 
   return (
