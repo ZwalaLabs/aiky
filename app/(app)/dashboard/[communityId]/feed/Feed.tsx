@@ -15,7 +15,7 @@ function Feed({
 }: {
 	content: string;
 	title: string;
-	likes: string;
+	likes: Array<string>;
 	time: string;
 	name: string;
 	image: string;
@@ -24,7 +24,7 @@ function Feed({
 
 	return (
 		<>
-			<div className="flex justify-between items-start flex-col border-2 rounded border-black max-w-xl p-2">
+			<div className="flex justify-between items-start flex-col border-2 rounded border-black p-2">
 				{/* Header */}
 				<div className="p-1">
 					<div className="flex h-12 items-center gap-3">
@@ -48,14 +48,13 @@ function Feed({
 					<>
 						<h3>{title}</h3>
 						<p>{content}</p>
-						<div className="self-end pt-6 flex">
-							{feedFooterOptions.Like}
-							<small>
-								{"("}
-								{parseInt(likes, 10)}
-								{")"}
-							</small>
-						</div>
+                        {console.log(likes)}
+						{likes.length ? (
+							<div className="self-end pt-6 flex">
+								{feedFooterOptions.Like}
+								<small>{`(${likes[0]})`}</small>
+							</div>
+						) : null}
 					</>
 				</section>
 				{/* Footer */}
