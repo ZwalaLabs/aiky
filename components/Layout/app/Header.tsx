@@ -1,3 +1,5 @@
+"use client";
+
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { Button } from "@/components/ui/button";
 import {
@@ -8,22 +10,36 @@ import {
 } from "@/components/ui/dropdown-menu";
 import { BadgePlus, LogOut } from "lucide-react";
 import Link from "next/link";
+import {
+  NavigationMenu,
+  NavigationMenuContent,
+  NavigationMenuItem,
+  NavigationMenuLink,
+  NavigationMenuList,
+  NavigationMenuTrigger,
+} from "@/components/ui/navigation-menu";
 
 function Header() {
   return (
     <header className="flex min-h-[3.5rem] items-center justify-between px-10">
-      <DropdownMenu>
-        <DropdownMenuTrigger>Community Name</DropdownMenuTrigger>
-        <DropdownMenuContent>
-          <DropdownMenuItem>Others</DropdownMenuItem>
-          <DropdownMenuItem>
-            <Button className="flex items-center gap-2">
-              <BadgePlus />
-              Create Community
-            </Button>
-          </DropdownMenuItem>
-        </DropdownMenuContent>
-      </DropdownMenu>
+      <NavigationMenu className="z-50">
+        <NavigationMenuList>
+          <NavigationMenuItem>
+            <NavigationMenuTrigger>Community Name</NavigationMenuTrigger>
+
+            <NavigationMenuContent className="flex flex-col gap-2">
+              <NavigationMenuLink>Others</NavigationMenuLink>
+
+              <NavigationMenuLink>
+                <Button className="flex items-center gap-2">
+                  <BadgePlus />
+                  Create Community
+                </Button>
+              </NavigationMenuLink>
+            </NavigationMenuContent>
+          </NavigationMenuItem>
+        </NavigationMenuList>
+      </NavigationMenu>
 
       <DropdownMenu>
         <DropdownMenuTrigger>

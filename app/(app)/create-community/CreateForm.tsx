@@ -18,13 +18,16 @@ import { Button } from "@/components/ui/button";
 import { trpc } from "@/app/(app)/_trpc/client";
 import toast from "react-hot-toast";
 import { communityTypeValues } from "@/lib/constants";
+import { useRouter } from "next/navigation";
 
 export default function CreateForm() {
+  const router = useRouter();
   const trpcUtils = trpc.useUtils();
 
   const addCommunityMutation = trpc.community.add.useMutation({
     trpc: { abortOnUnmount: false },
-    onSuccess: ({ message }) => {
+    onSuccess: ({ message, communityId }) => {
+      router.push(`/${communityId}/home`);
       toast.success(message);
     },
     onError: ({ message }) => {
@@ -90,7 +93,7 @@ export default function CreateForm() {
           render={({ field }) => (
             <FormItem className="space-y-3">
               <FormLabel className="text-2xl font-bold">
-                Select the category of your community.
+                Category of your community
               </FormLabel>
               <FormControl>
                 <RadioGroup

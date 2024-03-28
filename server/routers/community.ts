@@ -16,10 +16,14 @@ const formRouter = router({
         userId: ctx.user.id,
       };
 
-      await db.insert(communities).values(community);
+      const ids = await db
+        .insert(communities)
+        .values(community)
+        .returning({ id: communities.id });
 
       return {
         message: `Community ${input.name} created`,
+        communityId: ids[0].id,
       };
     }),
 });
