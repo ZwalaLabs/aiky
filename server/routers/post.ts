@@ -1,10 +1,13 @@
 import { authedProcedure, router } from "@/server/trpc";
-import { createPostSchema } from "@/lib/zodSchemas";
+import { createPostSchema, getAllPostSchema } from "@/lib/zodSchemas";
 import db from "@/db";
 import { InsertPost, posts } from "@/db/schema";
+import { getAllPosts } from "@/lib/dbQueries";
 
 const postRouter = router({
-  getAll: authedProcedure.query(async () => "true"),
+  getAll: authedProcedure
+    .input(getAllPostSchema)
+    .query(async ({ input }) => getAllPosts(input.communityId)),
   add: authedProcedure
     .input(createPostSchema)
     .mutation(async ({ ctx, input }) => {

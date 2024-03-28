@@ -82,7 +82,11 @@ export function CreatePostForm() {
             </FormItem>
           )}
         />
-        <Button type="submit" className="self-center text-xl">
+        <Button
+          type="submit"
+          className="self-center text-xl"
+          disabled={addPost.isLoading}
+        >
           Post
         </Button>
       </form>

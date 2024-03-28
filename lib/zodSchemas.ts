@@ -18,6 +18,10 @@ export const createCommunityInput = z.object({
   type: communityType,
 });
 
+export const getAllPostSchema = z.object({
+  communityId: z.string(),
+});
+
 export const createPostSchema = z.object({
   title: z.string().min(2, {
     message: "Title must be at least 2 characters.",
