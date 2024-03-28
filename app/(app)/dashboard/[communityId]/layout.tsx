@@ -13,10 +13,10 @@ export default async function CommunityLayout({
     <>
       <Header />
 
-      <div className="flex">
+      <div className="flex max-h-[600px]">
         <Sidebar />
 
-        <main className="flex-[8_8_0%]">{children}</main>
+        <main className="flex-[8_8_0%] overflow-y-scroll no-scrollbar">{children}</main>
       </div>
     </>
   );
