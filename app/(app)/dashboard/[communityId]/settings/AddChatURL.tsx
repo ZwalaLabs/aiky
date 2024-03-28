@@ -30,7 +30,7 @@ const formSchema = z.object({
   chatURL: z.string(),
 });
 
-function Chat({ initCommunity }: { initCommunity: SelectCommunity }) {
+function AddChatURL({ initCommunity }: { initCommunity: SelectCommunity }) {
   const [open, setOpen] = useState(false);
 
   const editCommunity = trpc.community.edit.useMutation();
@@ -107,4 +107,4 @@ function Chat({ initCommunity }: { initCommunity: SelectCommunity }) {
   );
 }
 
-export default Chat;
+export default AddChatURL;

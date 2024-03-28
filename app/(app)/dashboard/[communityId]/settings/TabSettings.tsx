@@ -1,9 +1,12 @@
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import Community from "./Community";
-import Chat from "./Chat";
+import AddChatURL from "./AddChatURL";
 import db from "@/db";
 import { eq } from "drizzle-orm";
 import { communities } from "@/db/schema";
+import Image from "next/image";
+import { SquareArrowOutUpRight } from "lucide-react";
+import Link from "next/link";
 
 export async function TabSettings({
   params,
@@ -36,7 +39,19 @@ export async function TabSettings({
         <Community initCommunity={community} />
       </TabsContent>
       <TabsContent value="chat-settings">
-        <Chat initCommunity={community} />
+        {community.chatURL ? (
+          <div className="flex flex-col gap-6">
+            <div className="flex items-center gap-4">
+              <h1 className="text-4xl font-black">Connected</h1>
+              <Link href={community.chatURL}>
+                <SquareArrowOutUpRight />
+              </Link>
+            </div>
+            <Image src="/discord.svg" alt="discord" width={300} height={100} />
+          </div>
+        ) : (
+          <AddChatURL initCommunity={community} />
+        )}
       </TabsContent>
     </Tabs>
   );
