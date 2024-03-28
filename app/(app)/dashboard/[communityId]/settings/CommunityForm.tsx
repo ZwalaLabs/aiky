@@ -119,10 +119,11 @@ export function CommunityForm({
             <FormItem>
               <FormLabel>Community Logo</FormLabel>
 
-              <FormControl>
+              <FormControl className="flex items-center">
                 <>
                   {!form.formState.dirtyFields.logo ? (
                     <UploadButton
+                      className="items-start"
                       endpoint="imageUploader"
                       onClientUploadComplete={(res) => {
                         form.setValue("logo", res[0].url, {

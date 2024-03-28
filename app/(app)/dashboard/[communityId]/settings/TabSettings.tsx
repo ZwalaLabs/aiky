@@ -1,8 +1,21 @@
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import Community from "./Community";
 import Chat from "./Chat";
+import db from "@/db";
+import { eq } from "drizzle-orm";
+import { communities } from "@/db/schema";
 
-export function TabSettings({ params }: { params: { communityId: string } }) {
+export async function TabSettings({
+  params,
+}: {
+  params: { communityId: string };
+}) {
+  const community = await db.query.communities.findFirst({
+    where: eq(communities.id, params.communityId),
+  });
+
+  if (!community) return <div>Community not found</div>;
+
   return (
     <Tabs defaultValue="community-settings">
       <TabsList className="grid w-full grid-cols-2">
@@ -20,10 +33,10 @@ export function TabSettings({ params }: { params: { communityId: string } }) {
         </TabsTrigger>
       </TabsList>
       <TabsContent value="community-settings">
-        <Community params={params} />
+        <Community initCommunity={community} />
       </TabsContent>
       <TabsContent value="chat-settings">
-        <Chat />
+        <Chat initCommunity={community} />
       </TabsContent>
     </Tabs>
   );
