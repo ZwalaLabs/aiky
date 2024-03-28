@@ -3,17 +3,20 @@ import { ReactNode } from "react";
 import Sidebar from "./Sidebar";
 
 export default async function CommunityLayout({
+  params,
   children,
 }: {
   children: ReactNode;
+  params: { communityId: string };
 }) {
   return (
     <>
       <Header />
+
       <div className="flex">
         <Sidebar />
 
-        <main className="flex-[7_7_0%]">{children}</main>
+        <main className="flex-[8_8_0%]">{children}</main>
       </div>
     </>
   );
