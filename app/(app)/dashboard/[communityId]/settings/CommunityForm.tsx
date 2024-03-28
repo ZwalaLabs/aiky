@@ -19,6 +19,9 @@ import { SelectCommunity } from "@/db/schema";
 import toast from "react-hot-toast";
 import { trpc } from "@/app/(app)/_trpc/client";
 import { useRouter } from "next/navigation";
+import { UploadButton } from "@/components/utils/uploadthing";
+import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
+import Image from "next/image";
 
 const communityFormSchema = z.object({
   logo: z.string(),
@@ -115,8 +118,34 @@ export function CommunityForm({
           render={({ field }) => (
             <FormItem>
               <FormLabel>Community Logo</FormLabel>
+
               <FormControl>
-                <Input type="file" {...field} />
+                <>
+                  {!form.formState.dirtyFields.logo ? (
+                    <UploadButton
+                      endpoint="imageUploader"
+                      onClientUploadComplete={(res) => {
+                        form.setValue("logo", res[0].url, {
+                          shouldTouch: true,
+                          shouldDirty: true,
+                        });
+                      }}
+                      onUploadError={(error: Error) => {
+                        console.log(`ERROR! ${error.message}`);
+                      }}
+                    />
+                  ) : (
+                    ""
+                  )}
+                  {initCommunity.logo || form.getValues("logo") ? (
+                    <Avatar className="h-24 w-24">
+                      <AvatarImage
+                        src={initCommunity.logo || form.getValues("logo")}
+                      />
+                      <AvatarFallback>{initCommunity.name}</AvatarFallback>
+                    </Avatar>
+                  ) : null}
+                </>
               </FormControl>
               <FormMessage />
             </FormItem>
@@ -161,17 +190,48 @@ export function CommunityForm({
             <FormItem>
               <FormLabel>
                 Cover Photo (Recommended size: 1920x1080 (16:9) and less than
-                10MB)
+                8MB)
               </FormLabel>
               <FormControl>
-                <Input type="file" {...field} />
+                <>
+                  {!form.formState.dirtyFields.coverPhoto ? (
+                    <UploadButton
+                      endpoint="imageUploader"
+                      onClientUploadComplete={(res) => {
+                        form.setValue("coverPhoto", res[0].url, {
+                          shouldTouch: true,
+                          shouldDirty: true,
+                        });
+                      }}
+                      onUploadError={(error: Error) => {
+                        console.log(`ERROR! ${error.message}`);
+                      }}
+                    />
+                  ) : (
+                    ""
+                  )}
+                  {initCommunity.coverPhoto || form.getValues("coverPhoto") ? (
+                    <Image
+                      src={
+                        initCommunity.coverPhoto || form.getValues("coverPhoto")
+                      }
+                      alt={initCommunity.description}
+                      width={1920}
+                      height={1080}
+                    />
+                  ) : null}
+                </>
               </FormControl>
               <FormMessage />
             </FormItem>
           )}
         />
-        <Button type="submit" disabled={editCommunity.isLoading}>
-          Submit
+        <Button
+          type="submit"
+          disabled={editCommunity.isLoading || !form.formState.isDirty}
+          className="text-lg font-bold"
+        >
+          Save
         </Button>
       </form>
     </Form>
