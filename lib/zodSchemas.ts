@@ -13,7 +13,7 @@ export const createCommunityInput = z.object({
       message: "Form name can be at most 25 characters.",
     }),
   description: z.string().min(5, {
-    message: "Form description must be at least 2 characters.",
+    message: "Form description must be at least 5 characters.",
   }),
   type: communityType,
 });

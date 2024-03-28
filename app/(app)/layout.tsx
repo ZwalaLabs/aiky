@@ -1,5 +1,5 @@
 import { ReactNode } from "react";
-import { Provider } from "@/app/(app)/dashboard/[communityId]/Provider";
+import { Provider } from "@/app/(app)/Provider";
 
 export default async function CommunityLayout({
   children,

@@ -6,9 +6,9 @@ import { eq } from "drizzle-orm";
 
 export const t = initTRPC.context<Context>().create();
 
-export const router = t.router;
-export const publicProcedure = t.procedure;
+export const { router, createCallerFactory } = t;
 
+export const publicProcedure = t.procedure;
 export const authedProcedure = publicProcedure.use(async (opts) => {
   const { ctx } = opts;
   if (!ctx.session?.user) throw new TRPCError({ code: "UNAUTHORIZED" });

@@ -2,6 +2,7 @@ import type { AdapterAccount } from "@auth/core/adapters";
 import { createId } from "@paralleldrive/cuid2";
 import {
   integer,
+  json,
   pgTable,
   primaryKey,
   text,
@@ -9,6 +10,7 @@ import {
 } from "drizzle-orm/pg-core";
 
 import { communityTypeValues } from "@/lib/constants";
+import { relations } from "drizzle-orm";
 
 export const users = pgTable("user", {
   id: text("id")
@@ -82,8 +84,59 @@ export const communities = pgTable("community", {
     enum: communityTypeValues,
   }).notNull(),
   publicURL: text("publicURL").notNull().unique(),
+  chatURL: text("chatURL").unique(),
   logo: text("logo"),
   coverPhoto: text("coverPhoto"),
 });
 export type SelectCommunity = typeof communities.$inferSelect;
 export type InsertCommunity = typeof communities.$inferInsert;
+
+export const posts = pgTable("post", {
+  id: text("id")
+    .$defaultFn(() => createId())
+    .primaryKey()
+    .notNull(),
+  communityId: text("communityId")
+    .notNull()
+    .references(() => communities.id, { onDelete: "cascade" }),
+  userId: text("userId")
+    .notNull()
+    .references(() => users.id, { onDelete: "cascade" }),
+  timestamp: timestamp("timestamp", { mode: "string" })
+    .$defaultFn(() => new Date().toISOString())
+    .notNull(),
+  title: text("title").notNull(),
+  content: text("content").notNull(),
+  likes: json("likes").$type<string[]>().default([]).notNull(),
+});
+export type SelectPost = typeof posts.$inferSelect;
+export type InsertPost = typeof posts.$inferInsert;
+
+export const members = pgTable("member", {
+  id: text("id")
+    .$defaultFn(() => createId())
+    .primaryKey()
+    .notNull(),
+  userId: text("userId")
+    .notNull()
+    .references(() => users.id, { onDelete: "cascade" }),
+  communityId: text("communityId")
+    .notNull()
+    .references(() => communities.id, { onDelete: "cascade" }),
+});
+
+// Relations
+// export const communitiesRelations = relations(comm, ({ many }) => ({
+//   pages: many(pages),
+//   responses: many(responses),
+// }));
+export const postsRelations = relations(posts, ({ one }) => ({
+  communityId: one(communities, {
+    fields: [posts.communityId],
+    references: [communities.id],
+  }),
+  userId: one(users, {
+    fields: [posts.userId],
+    references: [users.id],
+  }),
+}));

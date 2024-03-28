@@ -36,7 +36,7 @@ export default function CreateCommunity() {
   const addCommunityMutation = trpc.community.add.useMutation({
     trpc: { abortOnUnmount: false },
     onSuccess: ({ message, communityId }) => {
-      router.push(`/${communityId}/home`);
+      router.push(`/dashboard/${communityId}/home`);
       toast.success(message);
     },
     onError: ({ message }) => {
