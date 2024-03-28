@@ -49,7 +49,7 @@ function Header() {
       <DropdownMenu>
         <DropdownMenuTrigger>
           <Avatar>
-            <AvatarImage src={session.data?.user?.image ?? "jupiter.svg"} />
+            <AvatarImage src={session.data?.user?.image ?? "/jupiter.svg"} />
             <AvatarFallback>{session.data?.user?.name}</AvatarFallback>
           </Avatar>
         </DropdownMenuTrigger>

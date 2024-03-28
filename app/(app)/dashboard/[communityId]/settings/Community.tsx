@@ -5,17 +5,13 @@ import {
   CardTitle,
 } from "@/components/ui/card";
 import { CommunityForm } from "./CommunityForm";
-import db from "@/db";
-import { eq } from "drizzle-orm";
-import { communities } from "@/db/schema";
+import { SelectCommunity } from "@/db/schema";
 
-async function Community({ params }: { params: { communityId: string } }) {
-  const community = await db.query.communities.findFirst({
-    where: eq(communities.id, params.communityId),
-  });
-
-  if (!community) return <div>Community not found</div>;
-
+async function Community({
+  initCommunity,
+}: {
+  initCommunity: SelectCommunity;
+}) {
   return (
     <>
       <CardHeader>
@@ -26,7 +22,7 @@ async function Community({ params }: { params: { communityId: string } }) {
       </CardHeader>
 
       <CardContent className="space-y-2">
-        <CommunityForm initCommunity={community} />
+        <CommunityForm initCommunity={initCommunity} />
       </CardContent>
     </>
   );
