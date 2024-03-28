@@ -18,19 +18,24 @@ import {
   NavigationMenuList,
   NavigationMenuTrigger,
 } from "@/components/ui/navigation-menu";
+import { useSession } from "next-auth/react";
 
 function Header() {
+  const session = useSession();
+
   return (
     <header className="flex min-h-[3.5rem] items-center justify-between px-10">
       <NavigationMenu className="z-50">
         <NavigationMenuList>
           <NavigationMenuItem>
-            <NavigationMenuTrigger>Community Name</NavigationMenuTrigger>
+            <NavigationMenuTrigger className="text-xl font-bold">
+              Community Name
+            </NavigationMenuTrigger>
 
-            <NavigationMenuContent className="flex flex-col gap-2">
-              <NavigationMenuLink>Others</NavigationMenuLink>
+            <NavigationMenuContent className="flex flex-col gap-4">
+              {/*<NavigationMenuLink>Others</NavigationMenuLink>*/}
 
-              <NavigationMenuLink>
+              <NavigationMenuLink href="/create-community">
                 <Button className="flex items-center gap-2">
                   <BadgePlus />
                   Create Community
@@ -44,8 +49,8 @@ function Header() {
       <DropdownMenu>
         <DropdownMenuTrigger>
           <Avatar>
-            <AvatarImage src="https://github.com/shadcn.png" />
-            <AvatarFallback>CN</AvatarFallback>
+            <AvatarImage src={session.data?.user?.image ?? "jupiter.svg"} />
+            <AvatarFallback>{session.data?.user?.name}</AvatarFallback>
           </Avatar>
         </DropdownMenuTrigger>
         <DropdownMenuContent>
