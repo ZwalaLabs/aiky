@@ -16,7 +16,7 @@ import { Button } from "@/components/ui/button";
 import { Textarea } from "@/components/ui/textarea";
 import { createPostSchema } from "@/lib/zodSchemas";
 
-export function FeedForm() {
+export function CreatePostForm() {
   const form = useForm<z.infer<typeof createPostSchema>>({
     resolver: zodResolver(createPostSchema),
     defaultValues: {

@@ -20,8 +20,16 @@ import toast from "react-hot-toast";
 import { communityTypeValues } from "@/lib/constants";
 import { useRouter } from "next/navigation";
 import { Textarea } from "@/components/ui/textarea";
+import { Dumbbell, SquareChevronUp, TrendingUp, Wallet } from "lucide-react";
 
-export default function CreateForm() {
+export const communityTypeIcons = {
+  "Personal Development": <TrendingUp />,
+  Finance: <Wallet />,
+  Fitness: <Dumbbell />,
+  Career: <SquareChevronUp />,
+};
+
+export default function CreateCommunity() {
   const router = useRouter();
   const trpcUtils = trpc.useUtils();
 
@@ -56,7 +64,7 @@ export default function CreateForm() {
     <Form {...form}>
       <form
         onSubmit={form.handleSubmit(onSubmit)}
-        className="from-primary/35 flex h-screen flex-[100%] flex-col justify-center gap-12 bg-gradient-to-bl via-white to-white p-12"
+        className="from-primary/35 flex h-screen flex-1 flex-col justify-center gap-12 bg-gradient-to-bl via-white to-white p-12"
       >
         <FormField
           control={form.control}
@@ -110,7 +118,12 @@ export default function CreateForm() {
                       <FormControl>
                         <RadioGroupItem value={category} />
                       </FormControl>
-                      <FormLabel className="font-normal">{category}</FormLabel>
+                      <FormLabel className="flex items-center gap-2 font-semibold">
+                        {category}
+                        <span className="text-primary">
+                          {communityTypeIcons[category]}
+                        </span>
+                      </FormLabel>
                     </FormItem>
                   ))}
                 </RadioGroup>

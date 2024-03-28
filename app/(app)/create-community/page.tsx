@@ -1,4 +1,4 @@
-import CreateForm from "@/app/(app)/create-community/CreateForm";
+import CreateCommunity from "@/app/(app)/create-community/CreateCommunity";
 import Image from "next/image";
 
 export default function Home() {
@@ -7,14 +7,15 @@ export default function Home() {
       <div className="flex flex-col md:flex-row">
         <Image
           src="/Create.png"
-          alt="Create, enagage and monetize your communities."
+          alt="CreateCommunity, enagage and monetize your communities."
           sizes="100vw"
           width="1000"
           height="1000"
-          className="flex-[100%] object-cover"
+          className="flex-1 object-cover"
           priority
         />
-        <CreateForm />
+
+        <CreateCommunity />
       </div>
     </main>
   );

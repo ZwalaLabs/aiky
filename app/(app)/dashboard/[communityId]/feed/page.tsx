@@ -1,10 +1,10 @@
-import { FeedForm } from "./FeedForm";
+import { CreatePostForm } from "./CreatePostForm";
 import FullFeed from "./FullFeed";
 
 async function Page() {
   return (
     <>
-      <FeedForm />
+      <CreatePostForm />
 
       <FullFeed />
     </>
