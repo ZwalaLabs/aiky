@@ -18,6 +18,16 @@ export const createCommunityInput = z.object({
   type: communityType,
 });
 
+export const editCommunityInput = z.object({
+  communityId: z.string(),
+  name: z.string().optional(),
+  description: z.string().optional(),
+  publicURL: z.string().optional(),
+  chatURL: z.string().optional(),
+  logo: z.string().optional(),
+  coverPhoto: z.string().optional(),
+});
+
 export const getAllPostSchema = z.object({
   communityId: z.string(),
 });
