@@ -4,6 +4,7 @@ import { AvatarFallback } from "@radix-ui/react-avatar";
 
 import { feedFooterOptions, createNewPostText } from "./../constant";
 import { useSession } from "next-auth/react";
+import FullFeed from "./FullFeed";
 
 function Feed({
 	title,
@@ -12,6 +13,7 @@ function Feed({
 	time,
 	name,
 	image,
+	userAuthenticated,
 }: {
 	content: string;
 	title: string;
@@ -19,6 +21,7 @@ function Feed({
 	time: string;
 	name: string;
 	image: string;
+	userAuthenticated: boolean;
 }) {
 	const session = useSession();
 
@@ -48,7 +51,6 @@ function Feed({
 					<>
 						<h3>{title}</h3>
 						<p>{content}</p>
-                        {console.log(likes)}
 						{likes.length ? (
 							<div className="self-end pt-6 flex">
 								{feedFooterOptions.Like}
