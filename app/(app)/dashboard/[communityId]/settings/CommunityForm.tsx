@@ -79,7 +79,10 @@ export function CommunityForm({
 
   return (
     <Form {...form}>
-      <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-8">
+      <form
+        onSubmit={form.handleSubmit(onSubmit)}
+        className="flex flex-col gap-4"
+      >
         {/*Public URL*/}
         <FormField
           control={form.control}
@@ -230,7 +233,7 @@ export function CommunityForm({
         <Button
           type="submit"
           disabled={editCommunity.isLoading || !form.formState.isDirty}
-          className="text-lg font-bold"
+          className="mt-10 text-lg font-bold"
         >
           Save
         </Button>

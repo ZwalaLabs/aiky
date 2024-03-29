@@ -40,7 +40,7 @@ export async function TabSettings({
       </TabsContent>
       <TabsContent value="chat-settings">
         {community.chatURL ? (
-          <div className="flex flex-col gap-6">
+          <div className="mt-10 flex flex-col gap-6">
             <div className="flex items-center gap-4">
               <h1 className="text-4xl font-black">Connected</h1>
               <Link href={community.chatURL}>

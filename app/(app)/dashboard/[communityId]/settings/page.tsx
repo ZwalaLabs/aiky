@@ -3,7 +3,7 @@ import { TabSettings } from "./TabSettings";
 
 function Page({ params }: { params: { communityId: string } }) {
   return (
-    <Card className="sm:w-9/10 w-3/4">
+    <Card>
       <CardHeader>
         <CardTitle className="text-primary text-4xl">Settings</CardTitle>
       </CardHeader>

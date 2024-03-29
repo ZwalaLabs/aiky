@@ -16,7 +16,7 @@ export default async function CommunityLayout({
       <div className="flex">
         <Sidebar />
 
-        <main className="no-scrollbar flex-[8_8_0%] overflow-y-scroll">
+        <main className="no-scrollbar ml-60 w-full overflow-y-scroll">
           {children}
         </main>
       </div>

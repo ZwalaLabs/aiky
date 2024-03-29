@@ -15,7 +15,7 @@ function CommunitySidebar() {
 
   return (
     <aside
-      className="flex-[2_2_0%] p-6"
+      className="fixed w-56 p-6"
       style={{ height: "calc(100vh - 3.5rem)" }}
     >
       <NavigationMenu className="flex-col items-start gap-12">
