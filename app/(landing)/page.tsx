@@ -46,7 +46,7 @@ function Landing() {
                 <p className="mx-auto max-w-[700px] pt-3 text-gray-800 md:text-xl/relaxed lg:text-base/relaxed xl:text-xl/relaxed dark:text-gray-400">
                   The platform for creators to monetize with their audience.
                   <br />
-                  Accessible. Customizable. Open Source.
+                  Create. Build. Monetize.
                 </p>
               </div>
               <div className="space-x-4 pt-2">
