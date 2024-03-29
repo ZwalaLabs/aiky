@@ -11,7 +11,7 @@ export default async function MemberLayout({
 }) {
   return (
     <>
-      <Header />
+      <Header name="hohoho" />
 
       <div className="flex">
         <MemberSidebar />
