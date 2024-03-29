@@ -22,11 +22,14 @@ async function Page({ params }: { params: { communityId: string } }) {
       eq(communities.id, params.communityId),
       eq(communities.userId, session?.user?.id ?? ""),
     ),
+    with: {
+      members: true,
+    },
   });
 
   if (!community) return <div>Community not found</div>;
 
-  const { name, publicURL, chatURL } = community;
+  const { name, publicURL, chatURL, members } = community;
 
   return (
     <>
@@ -44,7 +47,8 @@ async function Page({ params }: { params: { communityId: string } }) {
             <CardTitle className="text-base">Total Members</CardTitle>
           </CardHeader>
           <CardContent className="py-2 text-3xl font-bold">
-            {/* Members of the group */}1
+            {/* Members of the group */}
+            {members.length}
           </CardContent>
           {/*<CardFooter className="flex-row items-center gap-2 pt-2 text-xs text-slate-600">*/}
           {/*  <ArrowUp />*/}
