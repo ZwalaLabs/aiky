@@ -1,36 +1,21 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+# AIKY
+AIKY is community builder application providing private space and control to content creators. Community users gets empowered to grow professionally, build meaningful connections, and achieve their creative aspirations within a supportive and secure environment. Content creators gets empowered to collaborate, learn, and grow within a supportive and secure environment, ultimately helping them to elevate their craft and achieve their goals in the digital landscape.
 
-## Getting Started
+## Features
+- Post Messages in community (Admin)
+- Community settings (Admin)
+- User authentication powered by Next Auth
+- Member post view
+- Events update (expecting in v1)
+- Products update (expecting in v1)
+- members details
 
-First, run the development server:
+# Apps and Packages
+- web: A Next.js app. This serves as the frontend of upup. Built uisng Next Auth, Drizzle ORM (+ PostgreSQL), Radix UI and Tailwind.
+- ui: a stub React component library used by web application. Contains Radix UI and custom Tailwind components.
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
+Each package/app is 100% TypeScript.
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
-
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
-
-This project uses [`next/font`](https://nextjs.org/docs/basic-features/font-optimization) to automatically optimize and load Inter, a custom Google Font.
-
-## Learn More
-
-To learn more about Next.js, take a look at the following resources:
-
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
-
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
+## Deployment Link
+This project is deployed on vercel.
+- Link: https://aiky.vercel.app/
