@@ -41,7 +41,7 @@ export default function CreateCommunity() {
     },
     onError: ({ message }) => {
       if (message.includes("duplicate"))
-        toast.error("A community with this name already exists");
+        toast.error("A community with this URL already exists");
       else toast.error("Something went wrong");
     },
     onSettled: () => trpcUtils.community.getAll.invalidate(),

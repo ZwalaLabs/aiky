@@ -1,80 +1,77 @@
-"use client";
 import { Button } from "@/components/ui/button";
-import toast from "react-hot-toast";
 import {
-	Card,
-	CardContent,
-	CardHeader,
-	CardTitle,
-	CardFooter,
+  Card,
+  CardContent,
+  CardFooter,
+  CardHeader,
+  CardTitle,
 } from "@/components/ui/card";
-import { Users, ArrowUp, MessagesSquare, Copy } from "lucide-react";
+import { CircleCheck, MessagesSquare, Users } from "lucide-react";
 import Link from "next/link";
+import db from "@/db";
+import { and, eq } from "drizzle-orm";
+import { communities } from "@/db/schema";
+import { auth } from "@/lib/auth";
+import CommunityLink from "@/app/(app)/dashboard/[communityId]/home/CommunityLink";
 
-function Page({ params }: { params: { communityId: string } }) {
-	const copyLinkToClipboard = () => {
-		// Adding url for community page
-		const copiedText = params.communityId;
+async function Page({ params }: { params: { communityId: string } }) {
+  const session = await auth();
 
-		// Use the Clipboard API to copy the URL to the clipboard
-		navigator.clipboard
-			.writeText(copiedText)
-			.then(() => {
-        // success toast
-				toast.success("Link copied to clipboard!");
-			})
-			.catch((error) => {
-				// failure toast
-        toast.error("Failed to copy link. Please try again.");
-			});
-	};
-	return (
-		<>
-			<CardTitle className="text-3xl pt-2 pb-6">
-				Home
-				<div className='flex gap-1 items-center pt-2'>
-					{/* Leads to individual page */}
-					<a href="www.google.com" target='_blank' rel='noreferrer' className="text-xs underline">{params.communityId}</a>
-          <div role='button' onClick={copyLinkToClipboard} onKeyDown={(event)=>{
-            if(event.key === 'Enter'){
-              copyLinkToClipboard()
-            }
-          }}>
-					  <Copy/>
-          </div>
-				</div>
-			</CardTitle>
-			<div className="flex gap-4">
-				<Card className="p-1 w-2/5 rounded-xl">
-					<CardHeader className="flex-row pb-2 gap-2 items-center text-slate-400">
-						<Users />
-						<CardTitle className="text-base">Total Members</CardTitle>
-					</CardHeader>
-					<CardContent className="text-3xl font-bold py-2">
-						{/* Members of the group */}1
-					</CardContent>
-					<CardFooter className="flex-row gap-2 items-center text-xs text-slate-600 pt-2">
-						<ArrowUp />
-						<CardTitle className="text-sm">0 in last 30 days</CardTitle>
-					</CardFooter>
-				</Card>
-				<Card className="p-1 w-2/5 rounded-xl">
-					<CardHeader className="flex-row pb-2 gap-2 items-center text-slate-400">
-						<MessagesSquare />
-						<CardTitle className="text-base">Chat Connections</CardTitle>
-					</CardHeader>
-					<Button className="p-2 px-4 border bg-transparent text-slate-800  ml-10 rounded-xl my-3 hover:bg-blue-700 hover:text-white">
-						<Link href="settings">Connect to Discord</Link>
-					</Button>
-					<CardFooter className="flex-row gap-2 items-center text-slate-600">
-						Link your discord now
-					</CardFooter>
-				</Card>
-			</div>
-		</>
-	);
+  const community = await db.query.communities.findFirst({
+    where: and(
+      eq(communities.id, params.communityId),
+      eq(communities.userId, session?.user?.id ?? ""),
+    ),
+  });
 
-	// <>Hope {params.communityId}</>;
+  if (!community) return <div>Community not found</div>;
+
+  const { name, publicURL, chatURL } = community;
+
+  return (
+    <>
+      <CardTitle className="pb-6 pt-2 text-3xl">
+        {name}
+        <div className="flex items-center gap-1 pt-2">
+          <p className="text-sm underline">/{publicURL}</p>
+          <CommunityLink URL={publicURL} />
+        </div>
+      </CardTitle>
+      <div className="flex gap-4">
+        <Card className="w-2/5 rounded-xl p-1">
+          <CardHeader className="flex-row items-center gap-2 pb-2 text-slate-400">
+            <Users />
+            <CardTitle className="text-base">Total Members</CardTitle>
+          </CardHeader>
+          <CardContent className="py-2 text-3xl font-bold">
+            {/* Members of the group */}1
+          </CardContent>
+          {/*<CardFooter className="flex-row items-center gap-2 pt-2 text-xs text-slate-600">*/}
+          {/*  <ArrowUp />*/}
+          {/*  <CardTitle className="text-sm">0 in last 30 days</CardTitle>*/}
+          {/*</CardFooter>*/}
+        </Card>
+        <Card className="w-2/5 rounded-xl p-1">
+          <CardHeader className="flex-row items-center gap-2 pb-2 text-slate-400">
+            <MessagesSquare />
+            <CardTitle className="text-base">Chat Connections</CardTitle>
+          </CardHeader>
+          {chatURL ? (
+            <CardFooter className="flex-row items-center gap-2 text-green-600">
+              Discord Linked
+              <CircleCheck />
+            </CardFooter>
+          ) : (
+            <>
+              <Button className="my-3 ml-10 rounded-xl border bg-transparent  p-2 px-4 text-slate-800 hover:bg-blue-700 hover:text-white">
+                <Link href="settings">Connect to Discord</Link>
+              </Button>
+            </>
+          )}
+        </Card>
+      </div>
+    </>
+  );
 }
 
 export default Page;
