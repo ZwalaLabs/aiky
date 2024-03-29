@@ -17,6 +17,7 @@ async function Page({ params }: { params: { communityName: string } }) {
     where: or(
       eq(communities.name, params.communityName),
       eq(communities.id, params.communityName),
+      eq(communities.publicURL, params.communityName),
     ),
     with: {
       members: true,
