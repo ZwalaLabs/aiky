@@ -116,18 +116,27 @@ export const posts = pgTable("post", {
 export type SelectPost = typeof posts.$inferSelect;
 export type InsertPost = typeof posts.$inferInsert;
 
-export const members = pgTable("member", {
-  id: text("id")
-    .$defaultFn(() => createId())
-    .primaryKey()
-    .notNull(),
-  userId: text("userId")
-    .notNull()
-    .references(() => users.id, { onDelete: "cascade" }),
-  communityId: text("communityId")
-    .notNull()
-    .references(() => communities.id, { onDelete: "cascade" }),
-});
+export const members = pgTable(
+  "member",
+  {
+    userId: text("userId")
+      .notNull()
+      .references(() => users.id, { onDelete: "cascade" }),
+    communityId: text("communityId")
+      .notNull()
+      .references(() => communities.id, { onDelete: "cascade" }),
+  },
+  (table) => {
+    return {
+      id: primaryKey({
+        name: "id",
+        columns: [table.userId, table.communityId],
+      }),
+    };
+  },
+);
+export type SelectMember = typeof members.$inferSelect;
+export type InsertMember = typeof members.$inferInsert;
 
 // Relations
 export const communitiesRelations = relations(communities, ({ one, many }) => ({

@@ -43,7 +43,7 @@ function MemberSidebar() {
         </NavigationMenuSub>
 
         <NavigationMenuSub>
-          <Link href="../events">
+          <Link href="events">
             <NavigationMenuList className="w-40 cursor-pointer flex-col items-start gap-4 rounded-[20px] p-3 hover:bg-gray-300">
               <NavigationMenuItem
                 className={`flex items-center gap-4 text-sm ${
@@ -60,7 +60,7 @@ function MemberSidebar() {
         </NavigationMenuSub>
 
         <NavigationMenuSub>
-          <Link href="../products">
+          <Link href="products">
             <NavigationMenuList className="w-40 cursor-pointer flex-col items-start gap-4 rounded-[20px] p-3 hover:bg-gray-300">
               <NavigationMenuItem
                 className={`flex items-center gap-4 text-sm ${
@@ -77,7 +77,7 @@ function MemberSidebar() {
         </NavigationMenuSub>
 
         <NavigationMenuSub>
-          <Link href="../members">
+          <Link href="members">
             <NavigationMenuList className="w-40 cursor-pointer flex-col items-start gap-4 rounded-[20px] p-3 hover:bg-gray-300">
               <NavigationMenuItem
                 className={`flex items-center gap-4 text-sm ${
@@ -94,7 +94,7 @@ function MemberSidebar() {
         </NavigationMenuSub>
 
         <NavigationMenuSub>
-          <Link href="../challenges">
+          <Link href="challenges">
             <NavigationMenuList className="w-40 cursor-pointer flex-col items-start gap-4 rounded-[20px] p-3 hover:bg-gray-300">
               <NavigationMenuItem
                 className={`flex items-center gap-4 text-sm ${
