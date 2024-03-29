@@ -91,7 +91,9 @@ export function CommunityForm({
             <FormItem>
               <FormLabel>Public URL</FormLabel>
               <div className="flex items-center gap-2">
-                <span className="flex-3 text-lg font-bold">aiky.pro/</span>
+                <span className="flex-3 text-lg font-bold">
+                  aiky.vercel.app/
+                </span>
                 <FormControl>
                   <Input
                     placeholder="Enter Community URL"
@@ -103,7 +105,7 @@ export function CommunityForm({
                   className="flex-3 ml-6 cursor-pointer"
                   onClick={() => {
                     navigator.clipboard.writeText(
-                      `https://aiky.pro/${initCommunity.publicURL}`,
+                      `https://aiky.vercel.app/${initCommunity.publicURL}`,
                     );
 
                     toast.success("Copied Link to clipboard");

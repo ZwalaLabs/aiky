@@ -6,7 +6,7 @@ import toast from "react-hot-toast";
 
 function CommunityLink({ URL }: { URL: string }) {
   const copyLinkToClipboard = () => {
-    navigator.clipboard.writeText(`https://aiky.pro/${URL}`).then(() => {
+    navigator.clipboard.writeText(`https://aiky.vercel.app/${URL}`).then(() => {
       toast.success("Link copied to clipboard!");
     });
   };
