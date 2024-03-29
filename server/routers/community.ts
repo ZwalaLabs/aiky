@@ -11,7 +11,7 @@ const communityRouter = router({
     .mutation(async ({ ctx, input }) => {
       const community: InsertCommunity = {
         name: input.name,
-        publicURL: input.name,
+        publicURL: input.name.split(" ").join(""),
         description: input.description,
         type: input.type,
         userId: ctx.user.id,
