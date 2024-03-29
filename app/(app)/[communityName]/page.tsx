@@ -72,7 +72,7 @@ async function Page({ params }: { params: { communityName: string } }) {
             {isMember ? (
               <>
                 <Button>
-                  <Link href="/">Go to member portal</Link>
+                  <Link href={`/member/${id}/home`}>Go to member portal</Link>
                 </Button>
               </>
             ) : (
