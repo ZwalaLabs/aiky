@@ -21,6 +21,8 @@ function JoinCommunity({ communityId }: { communityId: string }) {
       {
         onSuccess({ message }) {
           toast.success(message);
+
+          router.push(`/member/${communityId}/home`);
         },
         onError({ message }) {
           if (message === "UNAUTHORIZED")
