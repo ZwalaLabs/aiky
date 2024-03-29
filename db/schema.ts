@@ -130,8 +130,23 @@ export const members = pgTable("member", {
 });
 
 // Relations
-export const communitiesRelations = relations(communities, ({ many }) => ({
+export const communitiesRelations = relations(communities, ({ one, many }) => ({
+  userId: one(users, {
+    fields: [communities.userId],
+    references: [users.id],
+  }),
   members: many(members),
+}));
+
+export const membersRelations = relations(members, ({ one }) => ({
+  userId: one(users, {
+    fields: [members.userId],
+    references: [users.id],
+  }),
+  communityId: one(communities, {
+    fields: [members.communityId],
+    references: [communities.id],
+  }),
 }));
 
 export const postsRelations = relations(posts, ({ one }) => ({
