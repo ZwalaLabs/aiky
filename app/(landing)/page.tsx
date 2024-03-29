@@ -104,7 +104,7 @@ function Landing() {
               </p>
             </div>
             <div className="mx-auto w-full max-w-sm space-y-2">
-              <form className="flex space-x-2" onSubmit={console.log('not implement in v0')}>
+              <form className="flex space-x-2">
                 <Input className="max-w-lg flex-1" placeholder="Enter your email" type="email" />
                 <Button type="submit">Sign Up</Button>
               </form>
