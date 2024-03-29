@@ -8,7 +8,7 @@ import {
   DropdownMenuItem,
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
-import { BadgePlus, LogOut } from "lucide-react";
+import { BadgePlus, LogOut, Minus } from "lucide-react";
 import Link from "next/link";
 import {
   NavigationMenu,
@@ -19,9 +19,17 @@ import {
   NavigationMenuTrigger,
 } from "@/components/ui/navigation-menu";
 import { useSession } from "next-auth/react";
+import { useParams } from "next/navigation";
 
-function Header({ name }: { name: string }) {
+function Header({
+  name,
+  isAdmin = false,
+}: {
+  name: string;
+  isAdmin?: boolean;
+}) {
   const session = useSession();
+  const params = useParams<{ communityId: string }>();
 
   return (
     <header className="flex h-[3.5rem] w-full items-center justify-between px-10">
@@ -46,6 +54,25 @@ function Header({ name }: { name: string }) {
         </NavigationMenuList>
       </NavigationMenu>
 
+      {isAdmin ? (
+        <NavigationMenu>
+          <NavigationMenuList>
+            <NavigationMenuItem>
+              <Link href={`/dashboard/${params.communityId}/home`}>
+                Admin View
+              </Link>
+            </NavigationMenuItem>
+
+            <Minus />
+
+            <NavigationMenuItem>
+              <Link href={`/member/${params.communityId}/home`}>
+                Member View
+              </Link>
+            </NavigationMenuItem>
+          </NavigationMenuList>
+        </NavigationMenu>
+      ) : null}
       <DropdownMenu>
         <DropdownMenuTrigger>
           <Avatar>

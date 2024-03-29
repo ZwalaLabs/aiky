@@ -31,11 +31,11 @@ export default async function MemberLayout({
 
   if (!isMember) return <div>Not a member of this community</div>;
 
-  const { name, chatURL } = community;
+  const { name, chatURL, userId } = community;
 
   return (
     <>
-      <Header name={name} />
+      <Header name={name} isAdmin={userId === session?.user?.id} />
 
       <div className="flex gap-20">
         <MemberSidebar />

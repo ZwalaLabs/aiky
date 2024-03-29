@@ -26,7 +26,10 @@ export default async function CommunityLayout({
 
   return (
     <>
-      <Header name={community.name} />
+      <Header
+        name={community.name}
+        isAdmin={community.userId === session?.user?.id}
+      />
 
       <div className="flex">
         <Sidebar />

@@ -50,7 +50,7 @@ function Landing() {
                 </p>
               </div>
               <div className="space-x-4 pt-2">
-                <Link href="/api/auth/signin">
+                <Link href="/api/auth/signin?callbackUrl=/create-community">
                   <Button className="text-xl">Get Started</Button>
                 </Link>
               </div>
