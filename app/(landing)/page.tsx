@@ -41,7 +41,7 @@ function Landing() {
             <div className="flex flex-col items-center space-y-6 text-center">
               <div className="space-y-12 py-4">
                 <h1 className="bg-primary text-3xl font-black tracking-tighter text-white sm:text-4xl md:text-5xl lg:text-8xl">
-                  Build your community
+                  Monetize your Community
                 </h1>
                 <p className="mx-auto max-w-[700px] pt-3 text-gray-800 md:text-xl/relaxed lg:text-base/relaxed xl:text-xl/relaxed dark:text-gray-400">
                   The platform for creators to monetize with their audience.
