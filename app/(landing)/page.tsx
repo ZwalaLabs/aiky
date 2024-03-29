@@ -8,14 +8,14 @@ import Image from "next/image";
 function Landing() {
   return (
     <div className="flex flex-col min-h-[100dvh]">
-      <header className="px-4 lg:px-6 h-14 flex items-center">
+      <header className="fixed w-full bg-black text-white px-4 lg:px-6 h-14 flex items-center">
         <nav className="ml-auto flex gap-4 sm:gap-6">
+          <Link className="text-sm font-medium hover:underline underline-offset-4" href="#home">
+            Home
+          </Link>
           <Link className="text-sm font-medium hover:underline underline-offset-4" href="#features">
             Features
           </Link>
-          {/* <Link className="text-sm font-medium hover:underline underline-offset-4" href="pricing">
-            Pricing
-          </Link> */}
           {/* <Link className="text-sm font-medium hover:underline underline-offset-4" href="ab">
             About
           </Link> */}
@@ -32,7 +32,7 @@ function Landing() {
                 <h1 className="text-3xl font-bold bg-primary text-white tracking-tighter sm:text-4xl md:text-5xl lg:text-6xl/none">
                   Build your community
                 </h1>
-                <p className="mx-auto max-w-[700px] text-primary texxt md:text-xl/relaxed lg:text-base/relaxed xl:text-xl/relaxed dark:text-gray-400">
+                <p className="mx-auto max-w-[700px] text-gray-800 md:text-xl/relaxed lg:text-base/relaxed xl:text-xl/relaxed dark:text-gray-400">
                   The platform for creators to connect with their audience. Accessible. Customizable. Open Source.
                 </p>
               </div>
