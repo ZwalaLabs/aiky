@@ -28,8 +28,12 @@ export const editCommunityInput = z.object({
   coverPhoto: z.string().optional(),
 });
 
-export const getAllPostSchema = z.object({
+export const doByCommunityId = z.object({
   communityId: z.string(),
+});
+
+export const doByPostId = z.object({
+  postId: z.string(),
 });
 
 export const createPostSchema = z.object({

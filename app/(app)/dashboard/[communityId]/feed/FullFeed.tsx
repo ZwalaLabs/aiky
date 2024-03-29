@@ -12,7 +12,7 @@ function FullFeed({
 }) {
   const params = useParams<{ communityId: string }>();
 
-  const getAllForms = trpc.post.getAll.useQuery(
+  const getAllPosts = trpc.post.getAll.useQuery(
     {
       communityId: params.communityId,
     },
@@ -24,18 +24,8 @@ function FullFeed({
   );
 
   return (
-    <section className='mx-auto flex max-w-screen-lg flex-col gap-4 border-b border-b-gray-300 p-8'>
-      {getAllForms.data?.map((post) => (
-        <Feed
-          key={post.id}
-          title={post.title}
-          content={post.content}
-          likes={post.likes}
-          time={post.timestamp}
-          name={post.userId.name}
-          image={post.userId.image}
-        />
-      ))}
+    <section className="mx-auto flex max-w-screen-lg flex-col gap-4 p-8">
+      {getAllPosts.data?.map((post) => <Feed key={post.id} post={post} />)}
     </section>
   );
 }
