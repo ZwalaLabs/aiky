@@ -10,7 +10,7 @@ import Link from "next/link";
 import { NavigationMenuSub } from "@radix-ui/react-navigation-menu";
 import { usePathname } from "next/navigation";
 
-function Sidebar() {
+function CommunitySidebar() {
   const pathname = usePathname();
 
   return (
@@ -71,4 +71,4 @@ function Sidebar() {
   );
 }
 
-export default Sidebar;
+export default CommunitySidebar;
