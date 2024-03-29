@@ -26,7 +26,7 @@ export const config = {
   theme: {
     colorScheme: "light",
     logo: "/favicon.ico",
-    brandColor: "#f97316",
+    brandColor: "#e11d48",
   },
   callbacks: {
     async session({ session }) {
