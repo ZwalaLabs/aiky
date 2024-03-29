@@ -22,6 +22,7 @@ export const users = pgTable("user", {
   emailVerified: timestamp("emailVerified", { mode: "date" }),
   image: text("image"),
 });
+export type SelectUser = typeof users.$inferSelect;
 
 export const accounts = pgTable(
   "account",
@@ -102,7 +103,10 @@ export const posts = pgTable("post", {
   userId: text("userId")
     .notNull()
     .references(() => users.id, { onDelete: "cascade" }),
-  timestamp: timestamp("timestamp", { mode: "string" })
+  timestamp: timestamp("timestamp", {
+    mode: "string",
+    withTimezone: true,
+  })
     .$defaultFn(() => new Date().toISOString())
     .notNull(),
   title: text("title").notNull(),
@@ -126,10 +130,10 @@ export const members = pgTable("member", {
 });
 
 // Relations
-// export const communitiesRelations = relations(comm, ({ many }) => ({
-//   pages: many(pages),
-//   responses: many(responses),
-// }));
+export const communitiesRelations = relations(communities, ({ many }) => ({
+  members: many(members),
+}));
+
 export const postsRelations = relations(posts, ({ one }) => ({
   communityId: one(communities, {
     fields: [posts.communityId],
