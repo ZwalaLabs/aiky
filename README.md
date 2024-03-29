@@ -11,7 +11,7 @@ AIKY is community builder application providing private space and control to con
 - members details
 
 # Apps and Packages
-- web: A Next.js app. This serves as the frontend of upup. Built uisng Next Auth, Drizzle ORM (+ PostgreSQL), Radix UI and Tailwind.
+- web: A Next.js app. This serves the frontend as well as backend of AIKY. Built using Next Auth, Drizzle ORM (+ PostgreSQL), Radix UI and Tailwind.
 - ui: a stub React component library used by web application. Contains Radix UI and custom Tailwind components.
 
 Each package/app is 100% TypeScript.
