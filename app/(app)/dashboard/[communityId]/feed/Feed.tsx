@@ -4,7 +4,6 @@ import { AvatarFallback } from "@radix-ui/react-avatar";
 
 import { feedFooterOptions, createNewPostText } from "./../constant";
 import { useSession } from "next-auth/react";
-import FullFeed from "./FullFeed";
 
 function Feed({
 	title,
@@ -12,7 +11,7 @@ function Feed({
 	likes,
 	time,
 	name,
-	image,
+	image, 
 	userAuthenticated,
 }: {
 	content: string;
