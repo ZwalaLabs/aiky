@@ -3,10 +3,12 @@ import { router } from "@/server/trpc";
 import { inferReactQueryProcedureOptions } from "@trpc/react-query";
 import { inferRouterInputs, inferRouterOutputs } from "@trpc/server";
 import postRouter from "@/server/routers/post";
+import memberRouter from "@/server/routers/member";
 
 export const appRouter = router({
   community: communityRouter,
   post: postRouter,
+  member: memberRouter,
 });
 
 export type AppRouter = typeof appRouter;
