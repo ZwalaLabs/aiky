@@ -20,7 +20,7 @@ import {
 } from "@/components/ui/navigation-menu";
 import { useSession } from "next-auth/react";
 
-function Header() {
+function Header({ name }: { name: string }) {
   const session = useSession();
 
   return (
@@ -29,7 +29,7 @@ function Header() {
         <NavigationMenuList>
           <NavigationMenuItem>
             <NavigationMenuTrigger className="text-xl font-bold">
-              Community Name
+              {name}
             </NavigationMenuTrigger>
 
             <NavigationMenuContent className="flex flex-col gap-4">

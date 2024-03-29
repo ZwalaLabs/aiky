@@ -130,10 +130,10 @@ export const members = pgTable("member", {
 });
 
 // Relations
-// export const communitiesRelations = relations(comm, ({ many }) => ({
-//   pages: many(pages),
-//   responses: many(responses),
-// }));
+export const communitiesRelations = relations(communities, ({ many }) => ({
+  members: many(members),
+}));
+
 export const postsRelations = relations(posts, ({ one }) => ({
   communityId: one(communities, {
     fields: [posts.communityId],
